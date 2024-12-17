@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  grt-sys-fidelity:
+    image: fidelity
+    environment:
+      - DB_HOST=db                  # Hostname do banco (nome do serviço MySQL)
+      - DB_USER=fidelity_user      # Usuário do banco
+      - DB_PASSWORD=fidelity_password  # Senha do usuário
+      - DB_NAME=fidelity_db        # Nome do banco de dados
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+
+  db:
+    image: mysql:8.0
+    container_name: fidelity-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: fidelity_db
+      MYSQL_USER: fidelity_user
+      MYSQL_PASSWORD: fidelity_password
+    ports:
+      - "3309:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
