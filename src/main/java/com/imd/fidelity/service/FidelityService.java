@@ -1,14 +1,13 @@
 package com.imd.fidelity.service;
 
-import com.imd.fidelity.repository.FidelityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.imd.fidelity.model.Fidelity;
 
 @Service
 public class FidelityService {
 
-    @Autowired
-    private FidelityRepository fidelityRepository;
-
-    public void calBonus(){}
+    public String processBonus(Fidelity request) {
+        // Lógica para processar o bônus normalmente
+        return "Bonus processed successfully for user " + request.getId();
+    }
 }
