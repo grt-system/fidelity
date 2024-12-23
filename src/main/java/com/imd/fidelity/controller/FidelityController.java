@@ -19,13 +19,13 @@ public class FidelityController {
     private FailureService failureService;  // Injetando a classe de falha
 
     @PostMapping("/bonus")
-    public ResponseEntity<?> getBonus(@RequestBody Fidelity request) {
+    public ResponseEntity<?> getBonus(@RequestParam long user, @RequestParam Double bonus) {
         try {
             // Simula uma falha antes de processar o bônus
             failureService.simulateFailure();  // Aciona a falha (simula timeout ou erro)
 
             // Processa o bônus se não houver falha
-            String result = fidelityService.processBonus(request);
+            String result = fidelityService.processBonus(user, bonus);
             return ResponseEntity.ok().body(result);
         } catch (RuntimeException e) {
             // Se ocorrer uma falha simulada
